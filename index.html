@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iOS Calculator</title>
+</head>
+<style>
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #5e5e5e; 
+  }
+  
+  .calculator {
+    background-color: black;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    overflow: hidden;
+    height: 500px;
+    width: 275px;
+    padding: 10px;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .display {
+    background-color: #000000;
+    color: #e1e5da;
+    font-size: 4rem;
+    padding: 20px;
+    margin-top : 40px;
+    text-align: right;
+  }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  button {
+    background-color: #292929;
+    color: #e1e5da  ;
+    border: none;
+    font-size: 1.5rem;
+    padding: 15px;
+    margin: 5px;
+    border-radius: 50%;
+  }
+
+  .last-col{
+    background-color: #f89804;
+    color:white;
+  }
+
+  .top-row{
+    background-color: #a1a3a3;
+    color:rgb(34, 34, 34);
+  }
+
+  .zero{
+    grid-area: 5/1/6/3;
+    border-radius: 50px;
+  }
+
+  .fullstop{
+    grid-area: 5/3/6/4;
+  }
+  .equalsto{
+    grid-area: 5/4/6/5;
+  }
+  
+  button:hover {
+    background-color: #ccc;
+    color: #292929;
+  }
+  
+</style>
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="top-row" onclick="clearDisplay()">AC</button>
+      <button class="top-row" onclick="appendToDisplay('%')">+/-</button>
+      <button class="top-row" onclick="appendToDisplay('%')">%</button>
+      <button class="last-col" onclick="appendToDisplay('/')">÷</button>
+      <button onclick="appendToDisplay('7')">7</button>
+      <button onclick="appendToDisplay('8')">8</button>
+      <button onclick="appendToDisplay('9')">9</button>
+      <button class="last-col" onclick="appendToDisplay('*')">x</button>
+      <button onclick="appendToDisplay('4')">4</button>
+      <button onclick="appendToDisplay('5')">5</button>
+      <button onclick="appendToDisplay('6')">6</button>
+      <button class="last-col" onclick="appendToDisplay('-')">-</button>
+      <button onclick="appendToDisplay('1')">1</button>
+      <button onclick="appendToDisplay('2')">2</button>
+      <button onclick="appendToDisplay('3')">3</button>
+      <button class="last-col" onclick="appendToDisplay('+')">+</button>
+      <button class="zero" onclick="appendToDisplay('0')">0</button>
+      <button class="fullstop" onclick="appendToDisplay('.')">.</button>
+      <button class="equalsto last-col" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    let displayValue = '0';
+
+function updateDisplay() {
+  document.getElementById('display').innerText = displayValue;
+}
+
+function appendToDisplay(value) {
+  if (displayValue === '0' && value !== '.') {
+    displayValue = value;
+  } else {
+    displayValue += value;
+  }
+  updateDisplay();
+}
+
+function clearDisplay() {
+  displayValue = '0';
+  updateDisplay();
+}
+
+function calculate() {
+  try {
+    displayValue = eval(displayValue);
+    updateDisplay();
+  } catch (error) {
+    displayValue = 'Error';
+    updateDisplay();
+  }
+}
+
+updateDisplay();
+
+  </script>
+</body>
+</html>
+
